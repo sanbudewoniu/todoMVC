@@ -41,8 +41,8 @@
 			{id: 3, name: '烫头', isCompleted: true},
 		];
 
-
-		//添加任务
+		vm.todoList = todoList;
+		//1.添加任务
 		vm.taskName = "";
 		vm.add = function () {
 			//处理id  数组的最后一项的id+1
@@ -60,7 +60,16 @@
 			}
 
 		}
-		vm.todoList = todoList;
+		
+		//2.删除任务
+		vm.del=function(id){
+			for(var i=0;i<todoList.length;i++){
+				console.log(todoList[i].id,id);
+				if(todoList[i].id==id){
+					todoList.splice(i,1)
+			}
+			}
+		}
 
 	}
 })(angular);
