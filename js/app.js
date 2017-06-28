@@ -86,5 +86,13 @@
 			vm.editingId=-1;
 		}
 
+		//4.切换任务的选中状态
+		vm.isCheckAll=false;
+		vm.checkAll=function(){
+			todoList.forEach(function(value){
+				value.isCompleted=vm.isCheckAll;
+			})
+		}
+
 	}
 })(angular);
