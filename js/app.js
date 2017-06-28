@@ -94,5 +94,16 @@
 			})
 		}
 
+		//6.清除已完成的任务
+		vm.clearCompleted=function(){
+			var temArr=[];
+			todoList.forEach(function(value,index){
+				if(!value.isCompleted){
+					temArr.push(value);
+				}
+			})
+			vm.todoList=temArr;
+			todoList=vm.todoList;
+		}
 	}
 })(angular);
