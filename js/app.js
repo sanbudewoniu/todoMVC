@@ -45,6 +45,9 @@
 		//1.添加任务
 		vm.taskName = "";
 		vm.add = function () {
+			if (vm.taskName.trim() === "") {
+				return;
+			}
 			//处理id  数组的最后一项的id+1
 			var id;
 			if (todoList.length == 0) {
@@ -60,15 +63,27 @@
 			}
 
 		}
-		
+
 		//2.删除任务
-		vm.del=function(id){
-			for(var i=0;i<todoList.length;i++){
-				console.log(todoList[i].id,id);
-				if(todoList[i].id==id){
-					todoList.splice(i,1)
+		vm.del = function (id) {
+			for (var i = 0; i < todoList.length; i++) {
+				console.log(todoList[i].id, id);
+				if (todoList[i].id == id) {
+					todoList.splice(i, 1);
+					break;
+				}
 			}
-			}
+		}
+
+		//3.修改任务
+		vm.editingId=-1;
+			vm.edit=function(id){
+				console.log(11);
+				vm.editingId=id;
+		}
+
+		vm.update=function(){
+			vm.editingId=-1;
 		}
 
 	}
