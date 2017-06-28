@@ -76,34 +76,43 @@
 		}
 
 		//3.修改任务
-		vm.editingId=-1;
-			vm.edit=function(id){
-				console.log(11);
-				vm.editingId=id;
+		vm.editingId = -1;
+		vm.edit = function (id) {
+			console.log(11);
+			vm.editingId = id;
 		}
 
-		vm.update=function(){
-			vm.editingId=-1;
+		vm.update = function () {
+			vm.editingId = -1;
 		}
 
 		//4.切换任务的选中状态
-		vm.isCheckAll=false;
-		vm.checkAll=function(){
-			todoList.forEach(function(value){
-				value.isCompleted=vm.isCheckAll;
+		vm.isCheckAll = false;
+		vm.checkAll = function () {
+			todoList.forEach(function (value) {
+				value.isCompleted = vm.isCheckAll;
 			})
 		}
 
-		//6.清除已完成的任务
-		vm.clearCompleted=function(){
-			var temArr=[];
-			todoList.forEach(function(value,index){
-				if(!value.isCompleted){
+		//5.清除已完成的任务
+		vm.clearCompleted = function () {
+			var temArr = [];
+			todoList.forEach(function (value, index) {
+				if (!value.isCompleted) {
 					temArr.push(value);
 				}
 			})
-			vm.todoList=temArr;
-			todoList=vm.todoList;
+			vm.todoList = temArr;
+			todoList = vm.todoList;
+		}
+
+		//6.处理清除按钮任务的显示和隐藏
+		vm.isShow = function () {
+			return todoList.some(function (value) {
+				if (value.isCompleted) {
+					return true;
+				}
+			})
 		}
 	}
 })(angular);
