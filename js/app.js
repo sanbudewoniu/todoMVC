@@ -1,37 +1,11 @@
-//(function(angular) {
-//	'use strict';
-//
-//	angular
-//		.module('todoApp', [])
-//		.controller('TodoController', ['$scope', TodoController]);
-//
-//
-//	// 控制器函数
-//	function TodoController($scope) {
-//		var vm = $scope;
-//
-//		// 代码写在此处！
-//
-//		// 1 展示任务列表
-//		// 抽象数据结构
-//		var todoList = [
-//			{ id: 1, name: '抽烟', isCompleted: false },
-//			{ id: 2, name: '喝酒', isCompleted: false },
-//			{ id: 3, name: '烫头', isCompleted: true },
-//		];
-//
-//		vm.todoList = todoList;
-//	}
-//
-//})(angular);
 (function (angular) {
 	"use strict";
 	angular
 		.module("todoApp", [])
-		.controller("todoController", ["$scope", Controller]);
+		.controller("todoController", ["$scope", "$location", Controller]);
 
 
-	function Controller($scope) {
+	function Controller($scope, $location) {
 		var vm = $scope;
 
 		//任务列表的数据结构
@@ -118,13 +92,25 @@
 		vm.count = 0;
 		vm.getUnCompletedCount = function () {
 			var count = vm.count;
-			console.log(111);
 			for (var i = 0; i < todoList.length; i++) {
 				if (!todoList[i].isCompleted) {
 					count++;
 				}
 			}
 			return count;
+		}
+
+		//8.显示不同状态的任务以及高亮处理
+		vm.status = undefined;
+		vm.location = $location;
+		vm.showAll = function () {
+			vm.status = undefined;
+		}
+		vm.showActive = function () {
+			vm.status = false;
+		}
+		vm.showCompleted = function () {
+			vm.status = true;
 		}
 	}
 })(angular);

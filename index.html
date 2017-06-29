@@ -27,7 +27,7 @@
 			<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
 
 			<!-- 如果当前任务是完成的，那么就添加 completed 类；-->
-			<li ng-repeat="todo in todoList track by $index" ng-class="{completed:todo.isCompleted,editing:editingId===todo.id }">
+			<li ng-repeat="todo in todoList | filter:{isCompleted:status} track by $index" ng-class="{completed:todo.isCompleted,editing:editingId===todo.id }">
 				<div class="view">
 					<input class="toggle" type="checkbox" ng-model="todo.isCompleted">
 					<label ng-bind="todo.name" ng-dblclick="edit(todo.id)"></label>
@@ -46,13 +46,13 @@
 		<!-- Remove this if you don't implement routing -->
 		<ul class="filters">
 			<li>
-				<a class="selected" href="#/">All</a>
+				<a class="selected" href="#/" ng-class="{selected:undefined==status}" ng-click="showAll()">All</a>
 			</li>
 			<li>
-				<a href="#/active">Active</a>
+				<a href="#/active" ng-class="{selected:false==status}" ng-click="showActive()">Active</a>
 			</li>
 			<li>
-				<a href="#/completed">Completed</a>
+				<a href="#/completed" ng-class="{selected:true==status}" ng-click="showCompleted()">Completed</a>
 			</li>
 		</ul>
 		<!-- Hidden if no completed items are left ↓ -->
