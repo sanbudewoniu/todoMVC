@@ -102,15 +102,21 @@
 
 		//8.显示不同状态的任务以及高亮处理
 		vm.status = undefined;
+
+		//9.根据hash值，设置status的状态
 		vm.location = $location;
-		vm.showAll = function () {
-			vm.status = undefined;
-		}
-		vm.showActive = function () {
-			vm.status = false;
-		}
-		vm.showCompleted = function () {
-			vm.status = true;
-		}
+		vm.$watch("location.url()", function (curVal) {
+			switch (curVal) {
+				case "/completed":
+					vm.status = true;
+					break;
+				case "/active":
+					vm.status = false;
+					break;
+				default:
+					vm.status = undefined;
+
+			}
+		})
 	}
 })(angular);
