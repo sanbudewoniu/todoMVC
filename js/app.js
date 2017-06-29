@@ -67,7 +67,6 @@
 		//2.删除任务
 		vm.del = function (id) {
 			for (var i = 0; i < todoList.length; i++) {
-				console.log(todoList[i].id, id);
 				if (todoList[i].id == id) {
 					todoList.splice(i, 1);
 					break;
@@ -113,6 +112,19 @@
 					return true;
 				}
 			})
+		}
+
+		//7.显示未完成的任务数
+		vm.count = 0;
+		vm.getUnCompletedCount = function () {
+			var count = vm.count;
+			console.log(111);
+			for (var i = 0; i < todoList.length; i++) {
+				if (!todoList[i].isCompleted) {
+					count++;
+				}
+			}
+			return count;
 		}
 	}
 })(angular);
