@@ -1,11 +1,22 @@
 (function (angular) {
 	"use strict";
 	angular
-		.module("todoApp", ["serviceApp"])
-		.controller("todoController", ["$scope", "$location", "todoService", Controller]);
+		.module("todoApp", ["ngRoute", "serviceApp"])
+		.config(["$routeProvider", function ($routeProvider) {
+			$routeProvider
+				.when("/:status?", {
+				templateUrl: "./app.html",
+				controller:"todoController"
+			})
+			.otherwise({
+				redirectTo:"/"
+			})
+
+		}])
+		.controller("todoController", ["$scope", "$location", "$routeParams","todoService", Controller]);
 
 
-	function Controller($scope, $location, todoService) {
+	function Controller($scope, $location, $routeParams,todoService) {
 		var vm = $scope;
 		var todoList = todoService.getData();
 		vm.todoList = todoList;
